@@ -7,7 +7,7 @@ from os.path import isfile, join
 
 def start():
     """
-    Start
+    Starts the client side
     :return:
     """
     files = [f for f in listdir(settings.DIR) if isfile(join(settings.DIR, f))]
@@ -31,6 +31,13 @@ def start():
 
 
 def send_file(file, ip, port):
+    """
+    Sends a file to a server listening at an specified ip and port
+    :param file:    The file
+    :param ip:      Server's IP
+    :param port:    Server's PORT
+    :return:
+    """
     try:
         s = socket.socket()
         s.connect((ip, port))
