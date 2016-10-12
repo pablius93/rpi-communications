@@ -1,3 +1,4 @@
+# Server side
 import settings
 import socket
 from os.path import join
@@ -9,7 +10,7 @@ def start():
     :return:
     """
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((settings.ANDROID_IP, settings.PORT))
+    s.bind((settings.SERVER_IP, settings.PORT))
     s.listen()
     print('Server listening at {}:{}'.format('192.168.1.41', settings.PORT))
     running = True
@@ -18,7 +19,7 @@ def start():
         try:
             sc, address = s.accept()
             print('Client connected: {}'.format(address))
-            file = join(settings.ANDROID_DIR, "file_{}".format(i))
+            file = join(settings.SERVER_DIR, "file_{}".format(i))
             f = open(file, 'wb')
             i += 1
             l = sc.recv(1024)

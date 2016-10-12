@@ -1,8 +1,8 @@
 # RPi Settings
 DIR = '/home/pablo/server'
 PORT = 777
-ANDROID_IP = '192.168.1.41'
-WAIT = 15
+SERVER_IP = '192.168.1.41'
+WAIT = 15                   # Seconds
 
-# Android settings
-ANDROID_DIR = '/home/pablo/rpifiles/'
+# Server settings
+SERVER_DIR = '/home/pablo/rpifiles/'

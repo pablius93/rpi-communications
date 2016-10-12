@@ -1,3 +1,4 @@
+# Raspberry PI side
 import settings
 import socket
 import time
@@ -20,7 +21,7 @@ def start():
                 print('New files detected')
                 for f in new_files:
                     print('\t-{}'.format(f))
-                    send_file(file=f, ip=settings.ANDROID_IP, port=settings.PORT)
+                    send_file(file=f, ip=settings.SERVER_IP, port=settings.PORT)
                 files = _files
             else:
                 print('No new files detected')
