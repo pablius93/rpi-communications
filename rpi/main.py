@@ -4,6 +4,7 @@ import socket
 import time
 from os import listdir
 from os.path import isfile, join
+import ftplib
 
 
 def start():
@@ -53,6 +54,27 @@ def send_file(file, ip, port):
         print('File sent: {}'.format(file))
     except socket.error:
         print("Unable to connect to device {}".format(ip))
+
+
+def send_by_ftp(file, ip, port):
+    """
+    Sends a file via FTP to a FTP Server
+    :param file:    The file
+    :param ip:      Server's IP
+    :param port:    Server's FTP port
+    :return:
+    """
+    try:
+        ftp = ftplib.FTP()
+        ftp.connect(ip, port)
+        ftp.login(settings.FTP_USER, settings.FTP_PASSWORD)
+        f = open(file, 'rb')
+        ftp.storbinary("STOR {}".format(file), f)
+        f.close()
+        ftp.close()
+    except ftplib.Error:
+        print('Unable to connect to device {}'.format(ip))
+
 
 if __name__ == '__main__':
     start()
