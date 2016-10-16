@@ -11,7 +11,6 @@ import ftplib
 def start():
     """
     Starts the client side
-    :return:
     """
     files = [f for f in listdir(settings.DIR) if isfile(join(settings.DIR, f))]
     running = True
@@ -24,7 +23,7 @@ def start():
                 for f in new_files:
                     print('\t-{}'.format(f))
                     if settings.TRANSFER_MODE == TransferMode.FTP:
-                        send_by_ftp(file=f, ip=settings.SERVER_IP, port=settings.PORT)
+                        send_by_ftp(file=f, ip=settings.FTP_SERVER_IP, port=settings.FTP_PORT)
                     elif settings.TRANSFER_MODE == TransferMode.SOCKET:
                         send_file(file=f, ip=settings.SERVER_IP, port=settings.PORT)
                 files = _files
@@ -42,7 +41,6 @@ def send_file(file, ip, port):
     :param file:    The file
     :param ip:      Server's IP
     :param port:    Server's PORT
-    :return:
     """
     try:
         s = socket.socket()
@@ -64,9 +62,8 @@ def send_by_ftp(file, ip, port):
     """
     Sends a file via FTP to a FTP Server
     :param file:    The file
-    :param ip:      Server's IP
-    :param port:    Server's FTP port
-    :return:
+    :param ip:      FTP Server's IP
+    :param port:    FTP Server's port
     """
     try:
         ftp = ftplib.FTP()

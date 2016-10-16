@@ -7,7 +7,6 @@ from . import settings
 def start():
     """
     Starts the server side
-    :return:
     """
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((settings.SERVER_IP, settings.PORT))
