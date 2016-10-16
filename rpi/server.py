@@ -1,7 +1,7 @@
 # Server side
-import settings
 import socket
 from os.path import join
+from . import settings
 
 
 def start():
@@ -12,7 +12,7 @@ def start():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.bind((settings.SERVER_IP, settings.PORT))
     s.listen()
-    print('Server listening at {}:{}'.format('192.168.1.41', settings.PORT))
+    print('Server listening at {}:{}'.format(settings.SERVER_IP, settings.PORT))
     running = True
     i = 1
     while running:

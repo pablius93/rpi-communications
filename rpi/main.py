@@ -1,5 +1,6 @@
 # Raspberry PI side
-import settings
+from . import settings
+from .settings import TransferMode
 import socket
 import time
 from os import listdir
@@ -22,7 +23,10 @@ def start():
                 print('New files detected')
                 for f in new_files:
                     print('\t-{}'.format(f))
-                    send_file(file=f, ip=settings.SERVER_IP, port=settings.PORT)
+                    if settings.TRANSFER_MODE == TransferMode.FTP:
+                        send_by_ftp(file=f, ip=settings.SERVER_IP, port=settings.PORT)
+                    elif settings.TRANSFER_MODE == TransferMode.SOCKET:
+                        send_file(file=f, ip=settings.SERVER_IP, port=settings.PORT)
                 files = _files
             else:
                 print('No new files detected')
@@ -43,7 +47,7 @@ def send_file(file, ip, port):
     try:
         s = socket.socket()
         s.connect((ip, port))
-        print('Connected to device: {}'.format(ip))
+        print('Connected to device: {}:{}'.format(ip, port))
         f = open(join(settings.DIR, file), "rb")
         l = f.read(1024)
         while l:
