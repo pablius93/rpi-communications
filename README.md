@@ -6,7 +6,7 @@ Detects the new files added to a directory and sends them to a specified host (s
 Usage:
 RPI:
 
-    python3.5 main.py
+    python3.5 client.py
 Server:
 
     sudo python3.5 server.py
